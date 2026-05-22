@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ponesakki M — Portfolio Website
 
 A modern, responsive personal portfolio built with **React + Vite** (frontend) and **Node.js + Express** (backend).
@@ -83,3 +84,6 @@ Runs at: http://localhost:5000
 | Backend | Node.js, Express |
 | Email | Nodemailer |
 | Styling | Pure CSS with CSS Variables |
+=======
+# FUTURE_FS_01
+>>>>>>> d001cd281ca871cb9933dff4365aa1cecfc88167
