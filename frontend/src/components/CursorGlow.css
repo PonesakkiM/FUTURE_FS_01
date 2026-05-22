@@ -1,0 +1,3 @@
+/* Remove custom cursor — use default arrow cursor */
+* { cursor: default !important; }
+a, button, [role="button"], label { cursor: pointer !important; }
