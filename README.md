@@ -3,46 +3,48 @@
 
 A modern, responsive personal portfolio built with **React + Vite** (frontend) and **Node.js + Express** (backend).
 
-## 🚀 Features
 
-- ✅ Dark / Light mode toggle
-- ✅ Typing animation (react-type-animation)
-- ✅ Smooth scroll animations (Framer Motion)
-- ✅ Animated skill progress bars
-- ✅ Education timeline
-- ✅ Project cards with category filtering
-- ✅ Certificates section
-- ✅ Achievements section
-- ✅ "Currently Learning" section with progress bars
-- ✅ Blog section
-- ✅ Contact form with Node.js email backend (Nodemailer)
-- ✅ Glassmorphism UI with blue accent
-- ✅ Fully mobile responsive
 
-## 📁 Structure
+🚀 This repository contains my personal portfolio website developed as part of my **Frontend Web Development Internship (Task 1)**. It showcases my skills, projects, and learning journey in AI, Data Science, and Web Development.
 
-```
-Portfolio/
-├── frontend/          # React + Vite app
-│   └── src/
-│       └── components/
-│           ├── Navbar
-│           ├── Hero
-│           ├── About
-│           ├── Skills
-│           ├── Education
-│           ├── Projects
-│           ├── Certificates
-│           ├── Achievements
-│           ├── CurrentlyLearning
-│           ├── Blog
-│           ├── Contact
-│           └── Footer
-└── backend/           # Node.js + Express API
-    └── server.js
-```
+---
 
-## ⚙️ Setup
+## 🔹 Features
+
+- Responsive and user-friendly design  
+- Clean and structured layout  
+- Sections included:
+  - About Me  
+  - Skills  
+  - Projects  
+  - Contact  
+- Showcases real-world projects  
+- Smooth navigation and modern UI  
+
+---
+
+## 🔹 Technologies Used
+
+- HTML  
+- CSS  
+- JavaScript  
+- React  
+
+---
+
+## 🔹 Projects Highlighted
+
+- 🔐 Sentinel Shield – Ransomware Detection & Prevention  
+- 🏙 Smart Infrastructure Failure Prediction System  
+- 📇 Online Contact Search Directory  
+
+---
+
+## 🔹 Installation & Usage
+
+1. Clone the repository  
+```bash
+git clone https://github.com/PonesakkiM/FUTURE_FS_01.git
 
 ### Frontend
 ```bash
@@ -61,11 +63,7 @@ npm start
 ```
 Runs at: http://localhost:5000
 
-### Gmail App Password Setup
-1. Enable 2FA on your Google account
-2. Go to Google Account → Security → App Passwords
-3. Generate a password for "Mail"
-4. Use it as `EMAIL_PASS` in `.env`
+
 
 ## 🎨 Customization
 
@@ -86,4 +84,4 @@ Runs at: http://localhost:5000
 | Styling | Pure CSS with CSS Variables |
 =======
 # FUTURE_FS_01
->>>>>>> d001cd281ca871cb9933dff4365aa1cecfc88167
+
