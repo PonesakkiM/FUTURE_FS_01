@@ -85,19 +85,21 @@ const handleSubmit = (e) => {
                     transition={{ delay: 0.3 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {d.href ? (
-                     <motion.div
-                     onClick={() => window.location.href = d.href}
-                     className="contact-detail"
-                     style={{ display: 'flex', cursor: 'pointer' }}
-                     whileHover={{ x: 6, background: 'var(--accent-glow)' }}
-                     transition={{ duration: 0.2 }}
-                     >
+                     <motion.a
+                      href={d.href}
+                      className="contact-detail"
+                      style={{ display: 'flex', cursor: 'pointer' }}
+                      whileHover={{ x: 6, background: 'var(--accent-glow)' }}
+                      transition={{ duration: 0.2 }}
+                      target={d.href.startsWith('http') ? '_blank' : undefined}
+                      rel={d.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      >
                         <div className="contact-detail-icon">{d.icon}</div>
                         <div>
                           <span className="detail-label">{d.label}</span>
                           <span className="detail-value">{d.value}</span>
                         </div>
-                      </motion.div>
+                      </motion.a>
                     ) : (
                       <div className="contact-detail">
                         <div className="contact-detail-icon">{d.icon}</div>
