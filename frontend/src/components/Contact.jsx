@@ -32,17 +32,20 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      if (res.ok) {
+      const data = await res.json();
+      if (res.ok && data.success) {
         setStatus('success');
         setForm({ name: '', email: '', subject: '', message: '' });
         setTimeout(() => setStatus(null), 4000);
       } else {
+        console.error('Contact error:', data);
         setStatus('error');
-        setTimeout(() => setStatus(null), 4000);
+        setTimeout(() => setStatus(null), 5000);
       }
-    } catch {
+    } catch (err) {
+      console.error('Contact fetch error:', err);
       setStatus('error');
-      setTimeout(() => setStatus(null), 4000);
+      setTimeout(() => setStatus(null), 5000);
     }
   };
 
@@ -209,7 +212,7 @@ export default function Contact() {
                         <FiCheck size={16} /> Message Sent!
                       </motion.span>
                     )}
-                    {!status && (
+                    {(!status || status === 'error') && (
                       <motion.span key="idle" className="btn-inner" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                         <FiSend size={16} /> Send Message
                       </motion.span>

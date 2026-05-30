@@ -8,9 +8,9 @@ import './Education.css';
 const timeline = [
   {
     title: 'B.Tech – Artificial Intelligence & Data Science',
-    institution: 'Your College Name',
+    institution: 'S.A Engineering College',
     location: 'Chennai, Tamil Nadu, India',
-    period: '2022 – 2026',
+    period: '2023 – 2027',
     grade: `CGPA: ${personal.cgpa} / 10`,
     desc: 'Specializing in machine learning, deep learning, data analytics, and intelligent systems. Actively participating in hackathons, symposiums, and coding competitions.',
     icon: <FiBook size={18} />,

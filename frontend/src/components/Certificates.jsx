@@ -46,8 +46,8 @@ const certificates = [
   },
   {
     title: 'Generative AI Professional',
-    issuer: 'Orcale',
-    date: '2024',
+    issuer: 'Oracle',
+    date: '2025',
     valid: '2027',
     color: '#06b6d4',
     emoji: '🏅',
@@ -57,7 +57,7 @@ const certificates = [
   {
     title: 'IBM ML with Python',
     issuer: 'Coursera',
-    date: '2024',
+    date: '2025',
     color: '#ec4899',
     emoji: '🏅',
     file: BASE + 'WhatsApp Image 2026-05-21 at 12.48.52 PM.jpeg',
