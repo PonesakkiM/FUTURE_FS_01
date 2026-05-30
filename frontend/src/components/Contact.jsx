@@ -10,7 +10,8 @@ import { personal } from '../data/personal';
 import emailjs from 'emailjs-com';
 
 const contactDetails = [
-  { icon: <FiMail size={18} />, label: 'Email', value: personal.email, href: `mailto:${personal.email}` },
+  { icon: <FiMail size={18} />, label: 'Email', value: personal.email, href: `mailto:${personal.email}?subject=Portfolio%20Enquiry&body=Hi%20Ponesakki%2C%0A%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20connect%20with%20you.%0A%0ARegards`
+},
   { icon: <FiGithub size={18} />, label: 'GitHub', value: personal.github.replace('https://', ''), href: personal.github },
   { icon: <FiLinkedin size={18} />, label: 'LinkedIn', value: personal.linkedin.replace('https://', ''), href: personal.linkedin },
   { icon: <FiMapPin size={18} />, label: 'Location', value: personal.location, href: null },
