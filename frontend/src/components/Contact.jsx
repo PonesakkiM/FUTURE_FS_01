@@ -10,8 +10,7 @@ import { personal } from '../data/personal';
 import emailjs from 'emailjs-com';
 
 const contactDetails = [
-  { icon: <FiMail size={18} />, label: 'Email', value: personal.email, href: `mailto:${personal.email}?subject=Portfolio%20Enquiry&body=Hi%20Ponesakki%2C%0A%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20connect%20with%20you.%0A%0ARegards`
-},
+  { icon: <FiMail size={18} />, label: 'Email', value: personal.email, href: `mailto:${personal.email}?subject=Portfolio%20Enquiry&body=Hi%2C%0A%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20connect%20with%20you.%0A%0ARegards.`},
   { icon: <FiGithub size={18} />, label: 'GitHub', value: personal.github.replace('https://', ''), href: personal.github },
   { icon: <FiLinkedin size={18} />, label: 'LinkedIn', value: personal.linkedin.replace('https://', ''), href: personal.linkedin },
   { icon: <FiMapPin size={18} />, label: 'Location', value: personal.location, href: null },
@@ -86,20 +85,19 @@ const handleSubmit = (e) => {
                     transition={{ delay: 0.3 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {d.href ? (
-                      <motion.a
-                        href={d.href}
-                        target={d.href.startsWith('http') ? '_blank' : undefined}
-                        rel="noopener noreferrer"
-                        className="contact-detail"
-                        whileHover={{ x: 6, background: 'var(--accent-glow)' }}
-                        transition={{ duration: 0.2 }}
-                      >
+                     <motion.div
+                     onClick={() => window.location.href = d.href}
+                     className="contact-detail"
+                     style={{ display: 'flex', cursor: 'pointer' }}
+                     whileHover={{ x: 6, background: 'var(--accent-glow)' }}
+                     transition={{ duration: 0.2 }}
+                     >
                         <div className="contact-detail-icon">{d.icon}</div>
                         <div>
                           <span className="detail-label">{d.label}</span>
                           <span className="detail-value">{d.value}</span>
                         </div>
-                      </motion.a>
+                      </motion.div>
                     ) : (
                       <div className="contact-detail">
                         <div className="contact-detail-icon">{d.icon}</div>
