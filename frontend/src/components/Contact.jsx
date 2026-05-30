@@ -10,7 +10,12 @@ import { personal } from '../data/personal';
 import emailjs from 'emailjs-com';
 
 const contactDetails = [
-  { icon: <FiMail size={18} />, label: 'Email', value: personal.email, href: `mailto:${personal.email}?subject=Portfolio%20Enquiry&body=Hi%2C%0A%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20connect%20with%20you.%0A%0ARegards.`},
+  { 
+    icon: <FiMail size={18} />, 
+    label: 'Email', 
+    value: personal.email, 
+    href: `mailto:${personal.email}?subject=Portfolio%20Enquiry&body=Hi%2C%0A%0AI%20visited%20your%20portfolio%20and%20would%20like%20to%20connect%20with%20you.%0A%0ARegards.`
+  },
   { icon: <FiGithub size={18} />, label: 'GitHub', value: personal.github.replace('https://', ''), href: personal.github },
   { icon: <FiLinkedin size={18} />, label: 'LinkedIn', value: personal.linkedin.replace('https://', ''), href: personal.linkedin },
   { icon: <FiMapPin size={18} />, label: 'Location', value: personal.location, href: null },
@@ -24,43 +29,57 @@ export default function Contact() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  setStatus('sending');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus('sending');
 
-  const templateParams = {
-    from_name: form.name,
-    from_email: form.email,
-    subject: form.subject,
-    message: form.message,
+    const templateParams = {
+      from_name: form.name,
+      from_email: form.email,
+      subject: form.subject,
+      message: form.message,
+    };
+
+    emailjs.send(
+      "service_pbvhw1t",
+      "template_prdojv7",
+      templateParams,
+      "Nog5_tnwcZQZbocsW"
+    )
+    .then(() => {
+      setStatus('success');
+      setForm({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setStatus(null), 4000);
+    })
+    .catch((error) => {
+      console.log("ERROR:", error);
+      setStatus('error');
+      setTimeout(() => setStatus(null), 5000);
+    });
   };
 
-  emailjs.send(
-    "service_pbvhw1t",
-    "template_prdojv7",
-    templateParams,
-    "Nog5_tnwcZQZbocsW"
-  )
-  .then(() => {
-    setStatus('success');
-    setForm({ name: '', email: '', subject: '', message: '' });
-    setTimeout(() => setStatus(null), 4000);
-  })
-  .catch((error) => {
-    console.log("ERROR:", error);
-    setStatus('error');
-    setTimeout(() => setStatus(null), 5000);
-  });
-};
   return (
     <section id="contact" className="section contact-section" ref={ref}>
       <div className="container">
+
+        {/* Email fix helper (ONLY ADDITION) */}
+        {(() => {
+          const emailLink =
+            `mailto:${personal.email}` +
+            `?subject=${encodeURIComponent("Portfolio Enquiry")}` +
+            `&body=${encodeURIComponent(
+              "Hi,\n\nI visited your portfolio and would like to connect with you.\n\nRegards."
+            )}`;
+          contactDetails[0].href = emailLink;
+        })()}
+
         <motion.div variants={staggerContainer(0.1)} initial="hidden" animate={inView ? 'show' : 'hidden'}>
           <motion.h2 className="section-title" variants={staggerChild}>Get In Touch</motion.h2>
           <motion.p className="section-subtitle" variants={staggerChild}>Let's build something amazing together</motion.p>
         </motion.div>
 
         <div className="contact-grid">
+
           {/* Info panel */}
           <motion.div
             className="contact-info"
@@ -85,14 +104,14 @@ const handleSubmit = (e) => {
                     transition={{ delay: 0.3 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {d.href ? (
-                     <motion.a
-                      href={d.href}
-                      className="contact-detail"
-                      style={{ display: 'flex', cursor: 'pointer' }}
-                      whileHover={{ x: 6, background: 'var(--accent-glow)' }}
-                      transition={{ duration: 0.2 }}
-                      target={d.href.startsWith('http') ? '_blank' : undefined}
-                      rel={d.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      <motion.a
+                        href={d.href}
+                        className="contact-detail"
+                        style={{ display: 'flex', cursor: 'pointer' }}
+                        whileHover={{ x: 6, background: 'var(--accent-glow)' }}
+                        transition={{ duration: 0.2 }}
+                        target={d.href.startsWith('http') ? '_blank' : undefined}
+                        rel={d.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       >
                         <div className="contact-detail-icon">{d.icon}</div>
                         <div>
@@ -202,22 +221,20 @@ const handleSubmit = (e) => {
                   type="submit"
                   className="btn btn-primary submit-btn"
                   disabled={status === 'sending'}
-                  whileHover={{ scale: 1.02, boxShadow: '0 16px 48px rgba(79,142,247,0.4)' }}
-                  whileTap={{ scale: 0.97 }}
                 >
                   <AnimatePresence mode="wait">
                     {status === 'sending' && (
-                      <motion.span key="sending" className="btn-inner" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                      <motion.span key="sending">
                         <span className="spinner" /> Sending...
                       </motion.span>
                     )}
                     {status === 'success' && (
-                      <motion.span key="success" className="btn-inner" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
+                      <motion.span key="success">
                         <FiCheck size={16} /> Message Sent!
                       </motion.span>
                     )}
                     {(!status || status === 'error') && (
-                      <motion.span key="idle" className="btn-inner" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                      <motion.span key="idle">
                         <FiSend size={16} /> Send Message
                       </motion.span>
                     )}
@@ -227,18 +244,14 @@ const handleSubmit = (e) => {
 
               <AnimatePresence>
                 {status === 'error' && (
-                  <motion.p
-                    className="form-error"
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                  >
+                  <motion.p className="form-error">
                     <FiAlertCircle size={14} /> Something went wrong. Please try again.
                   </motion.p>
                 )}
               </AnimatePresence>
             </form>
           </motion.div>
+
         </div>
       </div>
     </section>
