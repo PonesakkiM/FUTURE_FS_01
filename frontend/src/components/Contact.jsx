@@ -7,6 +7,7 @@ import { staggerContainer, staggerChild, fadeLeft, fadeRight } from '../animatio
 import './Contact.css';
 
 import { personal } from '../data/personal';
+import emailjs from 'emailjs-com';
 
 const contactDetails = [
   { icon: <FiMail size={18} />, label: 'Email', value: personal.email, href: `mailto:${personal.email}` },
@@ -23,31 +24,34 @@ export default function Contact() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus('sending');
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setStatus('success');
-        setForm({ name: '', email: '', subject: '', message: '' });
-        setTimeout(() => setStatus(null), 4000);
-      } else {
-        setStatus('error');
-        setTimeout(() => setStatus(null), 5000);
-      }
-    } catch (err) {
-      console.error('Contact error:', err);
-      setStatus('error');
-      setTimeout(() => setStatus(null), 5000);
-    }
+const handleSubmit = (e) => {
+  e.preventDefault();
+  setStatus('sending');
+
+  const templateParams = {
+    from_name: form.name,
+    from_email: form.email,
+    subject: form.subject,
+    message: form.message,
   };
 
+  emailjs.send(
+    "service_pbvhw1t",
+    "template_prdojv7",
+    templateParams,
+    "Nog5_tnwcZQZbocsW"
+  )
+  .then(() => {
+    setStatus('success');
+    setForm({ name: '', email: '', subject: '', message: '' });
+    setTimeout(() => setStatus(null), 4000);
+  })
+  .catch((error) => {
+    console.log("ERROR:", error);
+    setStatus('error');
+    setTimeout(() => setStatus(null), 5000);
+  });
+};
   return (
     <section id="contact" className="section contact-section" ref={ref}>
       <div className="container">
