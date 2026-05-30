@@ -5,7 +5,7 @@ import { FiSend, FiMail, FiGithub, FiLinkedin, FiMapPin, FiCheck, FiAlertCircle 
 import MagneticButton from './MagneticButton';
 import { staggerContainer, staggerChild, fadeLeft, fadeRight } from '../animations/variants';
 import './Contact.css';
-import emailjs from "emailjs-com";
+import emailjs from '@emailjs/browser';
 
 import { personal } from '../data/personal';
 
@@ -30,7 +30,7 @@ export default function Contact() {
 
   emailjs.send(
     "service_pbvhw1t",
-    "template_ufuk8I3",
+    "template_prdojv7",
     {
       from_name: form.name,
       from_email: form.email,
@@ -39,16 +39,14 @@ export default function Contact() {
     },
     "Nog5_tnwcZQZbocsW"
   )
-  .then(() => {
-    setStatus('success');
-    setForm({ name: '', email: '', subject: '', message: '' });
-    setTimeout(() => setStatus(null), 4000);
-  })
-  .catch((error) => {
-    console.error('EmailJS error:', error);
-    setStatus('error');
-    setTimeout(() => setStatus(null), 5000);
-  });
+.then((response) => {
+  console.log("SUCCESS", response);
+  setStatus('success');
+})
+.catch((error) => {
+  console.log("FAILED", error);
+  setStatus('error');
+});
 };
 
   return (
